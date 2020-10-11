@@ -28,10 +28,16 @@ except:
 for i in video.streams.all():
 	print(i)
 
-# choose the first one
-video = youtube.streams.first()
+resolution = input("Enter resolution >> ")	
 
-print(video.title, video.video_id, video.age_restricted)
+if not resolution in video.streams.all:
+	print(">:> Not valid!")
+	sys.exit(-1)
+
+# choose the first one
+video = youtube.streams.get_by_resolution(resolution)
+
+print(f">?:Video={video.default_filename}/Size={video.filesize}::started>")
 # download it
 video.download() # also can input a folder to save into it
 
